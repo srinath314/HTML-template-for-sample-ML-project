@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimal Parameters for Heat Treatment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            background-color: #eff6fb; /* light blue background */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .output-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .output-value {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .calculate-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Optimal Parameters for Heat Treatment</h2>
+        
+        <form action="#" method="post" id="heat-treatment-form">
+            <h3>Input Parameter Ranges:</h3>
+            <label for="min-time">Minimum Time (hours):</label>
+            <input type="number" name="min-time" id="min-time" placeholder="Enter minimum time" required>
+            <label for="max-time">Maximum Time (hours):</label>
+            <input type="number" name="max-time" id="max-time" placeholder="Enter maximum time" required>
+
+            <label for="min-stress">Minimum Residual Stress (MPa):</label>
+            <input type="number" name="min-stress" id="min-stress" placeholder="Enter minimum stress" required>
+            <label for="max-stress">Maximum Residual Stress (MPa):</label>
+            <input type="number" name="max-stress" id="max-stress" placeholder="Enter maximum stress" required>
+
+            <label for="min-weight">Minimum Weight (kg):</label>
+            <input type="number" name="min-weight" id="min-weight" placeholder="Enter minimum weight" required>
+            <label for="max-weight">Maximum Weight (kg):</label>
+            <input type="number" name="max-weight" id="max-weight" placeholder="Enter maximum weight" required>
+
+            <div class="calculate-button">
+                <input type="submit" value="Calculate Optimal Parameters">
+            </div>
+        </form>
+
+        <div id="optimal-parameters" style="display: none;">
+            <h3>Optimal Parameters:</h3>
+            <div class="output-label">Optimal Time (hours):</div>
+            <div class="output-value" id="optimal-time">---</div>
+
+            <div class="output-label">Optimal Residual Stress (MPa):</div>
+            <div class="output-value" id="optimal-stress">---</div>
+
+            <div class="output-label">Optimal Weight (kg):</div>
+            <div class="output-value" id="optimal-weight">---</div>
+
+            <h3>Minimum Output Parameters:</h3>
+            <div class="output-label">Minimum Energy (kWh):</div>
+            <div class="output-value" id="min-energy">---</div>
+
+            <div class="output-label">Minimum Stress Reduction (%):</div>
+            <div class="output-value" id="min-stress-reduction">---</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('heat-treatment-form').addEventListener('submit', function(event) {
+            // Prevent default form submission
+            event.preventDefault();
+
+            // Get input values
+            var minTime = parseFloat(document.getElementById('min-time').value);
+            var maxTime = parseFloat(document.getElementById('max-time').value);
+            var minStress = parseFloat(document.getElementById('min-stress').value);
+            var maxStress = parseFloat(document.getElementById('max-stress').value);
+            var minWeight = parseFloat(document.getElementById('min-weight').value);
+            var maxWeight = parseFloat(document.getElementById('max-weight').value);
+
+            // Calculate optimal parameters and minimum output parameters
+            var optimalTime = (minTime + maxTime) / 2;
+            var optimalStress = (minStress + maxStress) / 2;
+            var optimalWeight = (minWeight + maxWeight) / 2;
+            var minEnergy = Math.min(minTime * minStress * minWeight / 1000, maxTime * maxStress * maxWeight / 1000);
+            var minStressReduction = Math.min((minTime + minStress) / minWeight * 10, (maxTime + maxStress) / maxWeight * 10);
+
+            // Display optimal parameters and minimum output parameters
+            document.getElementById('optimal-time').textContent = optimalTime.toFixed(2);
+            document.getElementById('optimal-stress').textContent = optimalStress.toFixed(2);
+            document.getElementById('optimal-weight').textContent = optimalWeight.toFixed(2);
+            document.getElementById('min-energy').textContent = minEnergy.toFixed(2);
+            document.getElementById('min-stress-reduction').textContent = minStressReduction.toFixed(2);
+
+            // Show the results section
+            document.getElementById('optimal-parameters').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Treatment Machine Learning App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            background-color: #eff6fb; /* light blue background */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .output-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .output-value {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Heat Treatment prediction Application</h2>
+        <form action="#" method="post" id="heat-treatment-form">
+            <label for="time">Time:</label>
+            <input type="number" name="time" id="time" placeholder="Enter time (in hours)" required>
+
+            <label for="residual-stress">Residual Stress:</label>
+            <input type="number" name="residual-stress" id="residual-stress" placeholder="Enter residual stress (in MPa)" required>
+
+            <label for="weight">Weight:</label>
+            <input type="number" name="weight" id="weight" placeholder="Enter weight (in kg)" required>
+
+            <input type="submit" value="Calculate">
+
+            <div class="output-label">Energy:</div>
+            <div class="output-value" id="output-energy">---</div>
+
+            <div class="output-label">Stress Reduction:</div>
+            <div class="output-value" id="output-stress-reduction">---</div>
+        </form>
+    </div>
+</body>
+</html>
